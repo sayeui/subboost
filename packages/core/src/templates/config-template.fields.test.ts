@@ -3,6 +3,13 @@ import { validateSubBoostTemplateConfig } from "./config-template";
 import { expectInvalid, validConfig } from "./config-template.test-helpers";
 
 describe("validateSubBoostTemplateConfig field validation", () => {
+  it("accepts an optional shared-check setting without changing old templates", () => {
+    const enabled = validateSubBoostTemplateConfig(validConfig({ sharedHealthChecks: true }));
+    expect(enabled.ok && enabled.config.sharedHealthChecks).toBe(true);
+    const legacy = validateSubBoostTemplateConfig(validConfig());
+    expect(legacy.ok && legacy.config.sharedHealthChecks).toBeUndefined();
+    expectInvalid({ sharedHealthChecks: "true" as never }, "sharedHealthChecks 必须是布尔值");
+  });
   it("rejects invalid dialer, module rule, scalar, and URL fields", () => {
     expectInvalid({ dialerProxyGroups: "bad" as never }, "dialerProxyGroups 必须是数组");
     expectInvalid({ dialerProxyGroups: [1 as never] }, "dialerProxyGroups 只能包含对象");

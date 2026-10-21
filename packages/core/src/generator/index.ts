@@ -19,6 +19,7 @@ import {
   applyDialerProxy 
 } from "./chain";
 import { DEFAULT_DNS_CONFIG } from "./dns";
+import { shareNodeHealthChecks } from "./shared-health-checks";
 import { resolveProxyGroupModuleName } from "@subboost/core/proxy-group-name";
 import type { ParsedNode } from "@subboost/core/types/node";
 import type {
@@ -590,7 +591,8 @@ export function generateClashConfig(options: GenerateOptions): ClashConfig {
     }),
   };
 
-  return clashConfig as unknown as ClashConfig;
+  const result = clashConfig as unknown as ClashConfig;
+  return config.sharedHealthChecks ? shareNodeHealthChecks(result, config) : result;
 }
 
 /**

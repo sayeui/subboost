@@ -24,6 +24,7 @@ describe("config store settings actions", () => {
     actions.setAllowLan(true);
     actions.setTestUrl("https://cp.cloudflare.com/generate_204");
     actions.setTestInterval(600);
+    actions.setSharedHealthChecks(true);
     actions.setRuleProviderBaseUrl("https://rules.example.com");
     actions.setNodeNameFilter({
       enabled: true,
@@ -38,6 +39,7 @@ describe("config store settings actions", () => {
       allowLan: true,
       testUrl: "https://cp.cloudflare.com/generate_204",
       testInterval: 600,
+      sharedHealthChecks: true,
       ruleProviderBaseUrl: "https://rules.example.com",
       nodeNameFilter: {
         enabled: true,
@@ -46,7 +48,7 @@ describe("config store settings actions", () => {
       cnIpNoResolve: true,
       experimentalCnUseCnRuleSet: true,
     });
-    expect(store.setAndGenerateConfig).toHaveBeenCalledTimes(9);
+    expect(store.setAndGenerateConfig).toHaveBeenCalledTimes(10);
     expect(store.set).not.toHaveBeenCalled();
   });
 

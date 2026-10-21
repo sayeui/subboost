@@ -187,6 +187,7 @@ export interface UserConfig {
   autoSelectStrategy: "url-test" | "fallback" | "load-balance";
   testUrl: string;
   testInterval: number;
+  sharedHealthChecks?: boolean;
   
   // 规则设置
   ruleProviderBaseUrl: string;

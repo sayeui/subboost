@@ -94,6 +94,8 @@ export function validateSubBoostTemplateConfig(value: unknown): ValidationResult
   if (!testUrl.ok) return testUrl;
   const testInterval = parsePositiveInteger(value.testInterval, "testInterval");
   if (!testInterval.ok) return testInterval;
+  const sharedHealthChecks = parseOptionalBoolean(value.sharedHealthChecks, "sharedHealthChecks");
+  if (!sharedHealthChecks.ok) return sharedHealthChecks;
   const ruleProviderBaseUrl = parseHttpUrlString(value.ruleProviderBaseUrl, "ruleProviderBaseUrl");
   if (!ruleProviderBaseUrl.ok) return ruleProviderBaseUrl;
   const cnIpNoResolve = parseOptionalBoolean(value.cnIpNoResolve, "cnIpNoResolve");
@@ -145,6 +147,7 @@ export function validateSubBoostTemplateConfig(value: unknown): ValidationResult
       allowLan: allowLan.value,
       testUrl: testUrl.value,
       testInterval: testInterval.value,
+      ...(sharedHealthChecks.value !== undefined ? { sharedHealthChecks: sharedHealthChecks.value } : {}),
       ruleProviderBaseUrl: ruleProviderBaseUrl.value,
     },
   };

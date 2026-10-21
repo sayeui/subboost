@@ -10,6 +10,12 @@ import {
 } from "./persistence";
 
 describe("config store persistence", () => {
+  it("round-trips shared checks and defaults older drafts to the legacy mode", () => {
+    const persisted = partializeConfigState({ ...structuredClone(initialState), sharedHealthChecks: true });
+    expect(normalizePersistedConfigState(persisted).sharedHealthChecks).toBe(true);
+    expect(normalizePersistedConfigState({}).sharedHealthChecks).toBe(false);
+    expect(normalizePersistedConfigState({ sharedHealthChecks: "true" }).sharedHealthChecks).toBe(false);
+  });
   it("continues without storage when its getter fails or no browser exists", () => {
     const missing = createSafeConfigDraftStorage(() => null);
     const throwing = createSafeConfigDraftStorage(() => {

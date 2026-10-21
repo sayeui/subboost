@@ -20,6 +20,7 @@
 - **Subscription conversion**: Import subscription links, YAML files, node links, and other common formats.
 - **Node management**: Rename, delete, or configure listening ports for nodes in batches.
 - **Node filtering**: Build `filtered proxy groups` with only selected nodes by source, region, and custom rules.
+- **Shared node health checks (this fork)**: Enable the option under Proxy Groups in advanced mode to share Mihomo health checks across overlapping groups of normally imported nodes. See the [configuration guide](docs/shared-health-checks.md).
 - **Chained proxies**: Configure chained proxies and `relay proxy groups` visually in one click.
 - **Precise routing**: Enable more than 30 common proxy groups and over 2,000 remote rule sets.
 - **Rule management**: Reorder rules for deeper customization by advanced users.

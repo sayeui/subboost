@@ -231,11 +231,11 @@ describe("useSubscriptionLink", () => {
 
   it("saves a normalized subscription payload and tracks success", async () => {
     const adapter = makeAdapter();
-    let hook = useRenderedHook({ subscriptionAdapter: adapter });
+    let hook = useRenderedHook({ subscriptionAdapter: adapter, sharedHealthChecks: true });
     hook.setSubscriptionName(" My Sub ");
     hook.setAutoUpdateEnabled(true);
     hook.setAutoUpdateHours(24);
-    hook = useRenderedHook({ subscriptionAdapter: adapter });
+    hook = useRenderedHook({ subscriptionAdapter: adapter, sharedHealthChecks: true });
 
     await hook.handleCreateSubscription();
     hook = useRenderedHook({ subscriptionAdapter: adapter });
@@ -261,6 +261,7 @@ describe("useSubscriptionLink", () => {
             ],
             proxyGroupAdvanced: { auto: { includeRegex: "Fast" } },
             proxyGroupAdvancedModeEnabled: true,
+            sharedHealthChecks: true,
             listenerPorts: { "Node A": 41000 },
             groupListeners: [{ id: "gl-1", target: { kind: "module", id: "auto" }, port: 7891 }],
             proxyGroupOrder: ["select", "auto"],

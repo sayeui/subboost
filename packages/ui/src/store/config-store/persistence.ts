@@ -84,6 +84,7 @@ export function normalizePersistedConfigState(
     ...(typeof state.allowLan === "boolean" ? { allowLan: state.allowLan } : {}),
     ...(typeof state.testUrl === "string" ? { testUrl: state.testUrl } : {}),
     ...(typeof state.testInterval === "number" ? { testInterval: state.testInterval } : {}),
+    sharedHealthChecks: state.sharedHealthChecks === true,
     ...(typeof state.ruleProviderBaseUrl === "string" ? { ruleProviderBaseUrl: state.ruleProviderBaseUrl } : {}),
     ...(typeof state.proxyGroupAdvancedModeEnabled === "boolean"
       ? { proxyGroupAdvancedModeEnabled: state.proxyGroupAdvancedModeEnabled }
@@ -105,6 +106,7 @@ export function partializeConfigState(state: ConfigState): Partial<ConfigState> 
     allowLan: state.allowLan,
     testUrl: state.testUrl,
     testInterval: state.testInterval,
+    sharedHealthChecks: state.sharedHealthChecks,
     ruleProviderBaseUrl: state.ruleProviderBaseUrl,
     proxyGroupAdvancedModeEnabled: state.proxyGroupAdvancedModeEnabled,
     nodeNameFilter: normalizeNodeNameFilterConfig(state.nodeNameFilter),

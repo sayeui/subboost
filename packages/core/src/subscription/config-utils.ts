@@ -331,6 +331,7 @@ export function buildGenerateOptionsFromConfig(
     ...(autoSelectStrategy ? { autoSelectStrategy } : {}),
     testUrl,
     testInterval,
+    ...(typeof config.sharedHealthChecks === "boolean" ? { sharedHealthChecks: config.sharedHealthChecks } : {}),
     ...(cnIpNoResolve !== undefined ? { cnIpNoResolve } : {}),
     ...(experimentalCnUseCnRuleSet !== undefined ? { experimentalCnUseCnRuleSet } : {}),
     ...(normalizePort(config.mixedPort) !== undefined ? { mixedPort: normalizePort(config.mixedPort) as number } : {}),

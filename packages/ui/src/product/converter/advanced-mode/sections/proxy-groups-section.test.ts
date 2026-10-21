@@ -45,6 +45,8 @@ describe("ProxyGroupsSection", () => {
     mocks.store = {
       enabledProxyGroups: ["select", "auto", "cn"],
       hiddenProxyGroups: ["cn"],
+      sharedHealthChecks: false,
+      setSharedHealthChecks: vi.fn(),
     };
     mocks.headerProps = undefined;
   });
@@ -79,5 +81,15 @@ describe("ProxyGroupsSection", () => {
 
     expect(html).not.toContain("categories-content");
     expect(mocks.headerProps).toMatchObject({ isExpanded: false });
+  });
+
+  it.each(["light", "dark"])("renders the accessible shared-check switch in the %s theme", (theme) => {
+    mocks.store.sharedHealthChecks = true;
+    const html = renderToStaticMarkup(React.createElement("div", { "data-theme": theme },
+      React.createElement(ProxyGroupsSection, { isExpanded: true, onToggle: vi.fn() })));
+    expect(html).toContain("共享节点测速");
+    expect(html).toContain('id="shared-health-checks"');
+    expect(html).toContain('aria-checked="true"');
+    expect(html).toContain("text-fg-60");
   });
 });

@@ -70,6 +70,7 @@ describe("computeGeneratedYamlResult", () => {
         ],
         testUrl: "https://cp.cloudflare.com/generate_204",
         testInterval: 600,
+        sharedHealthChecks: true,
         enabledProxyGroups: ["select", "ai"],
         ruleOrder: ["module:ai"],
       })
@@ -102,6 +103,7 @@ describe("computeGeneratedYamlResult", () => {
           enabledRules: ["select", "ai"],
           ruleOrder: ["module:ai"],
           autoSelectStrategy: "url-test",
+          sharedHealthChecks: true,
         }),
       })
     );

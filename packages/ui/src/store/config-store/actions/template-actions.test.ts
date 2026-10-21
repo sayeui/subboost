@@ -28,6 +28,13 @@ function createHarness(overrides: Record<string, unknown> = {}) {
 }
 
 describe("createTemplateActions", () => {
+  it("restores the shared-check setting and resets it for older templates", () => {
+    const { actions, getState } = createHarness();
+    actions.applyTemplateConfig({ sharedHealthChecks: true } as SubBoostTemplateConfig);
+    expect(getState().sharedHealthChecks).toBe(true);
+    actions.applyTemplateConfig({} as SubBoostTemplateConfig);
+    expect(getState().sharedHealthChecks).toBe(false);
+  });
   it("switches builtin templates and resets template-specific edits", () => {
     const { actions, getState } = createHarness({
       enabledProxyGroups: ["select", "ai"],
